@@ -33,10 +33,12 @@ app.use(bodyParser.urlencoded({
 app.use(express.static("public"));
 
 // Database configuration with mongoose
+const URI = process.env.MONGODB_URI || "mongodb://localhost/week18day3mongoose"; 
+mongoose.connect(URI, {
+  useMongoClient: true,
+});
 const db = mongoose.connection;
 
-const URI = process.env.MONGODB_URI || "mongodb://localhost/week18day3mongoose"; 
-mongoose.connect(URI);
 
 // Show any mongoose errors
 db.on("error", function(error) {
